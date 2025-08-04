@@ -1,0 +1,6 @@
+# Config
+pinning-strategy = "no-pin"
+
+[mirrors]
+
+[pypi-config]

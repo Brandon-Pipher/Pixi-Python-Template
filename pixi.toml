@@ -1,0 +1,149 @@
+[workspace]
+authors = ["Brandon Pipher <mail@brandonpipher.com>"]
+channels = ["conda-forge"]
+name = "Pixi-Python-Template"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[feature.gpu.system-requirements]
+cuda = "12.0"
+
+[feature.gpu.dependencies]
+cuda-version = "12.*"
+pytorch-gpu = ">=2.6"
+tensorflow-gpu = ">=2.18"
+
+[feature.cpu.dependencies]
+pytorch-cpu    = ">=2.5"
+tensorflow-cpu = ">=2.15"  
+
+[feature.network.dependencies]
+cdlib = "*"
+igraph = "*"
+leidenalg = "*"
+networkx = "*"
+pyvis = "*"
+pytorch_geometric = "*"
+
+[environments]
+cpu = ["cpu"]
+gpu = ["gpu"]
+network = ["network"]
+default = []
+
+[tasks]
+check-env = """
+python -c "import os; os.environ['TF_CPP_MIN_LOG_LEVEL'] = '0'; \
+import importlib.util
+
+def check_module(name):
+    return importlib.util.find_spec(name) is not None
+
+if check_module('torch'):
+    import torch
+    print('=== PyTorch ===')
+    print('Version:', torch.__version__)
+    print('CUDA Available:', torch.cuda.is_available())
+else:
+    print('PyTorch is NOT installed.')
+
+print()
+
+if check_module('tensorflow'):
+    import tensorflow as tf
+    print('=== TensorFlow ===')
+    print('Version:', tf.__version__)
+    print('Built with CUDA:', tf.test.is_built_with_cuda())
+    print('Available GPUs:', tf.config.list_physical_devices('GPU'))
+else:
+    print('TensorFlow is NOT installed.')
+"
+"""
+
+[dependencies]
+python = "<3.13"
+
+# Statistics
+numpy = "*"
+scipy = "*"
+statsmodels = "*"
+
+# Data
+dask = "*"
+duckdb = "*"
+openpyxl = "*"
+pandas = "*"
+polars = "*"
+pyarrow = "*"
+pyjanitor = "*"
+pyspark = "*"
+
+# Jupyter
+ipykernel = "*"
+ipywidgets = "*"
+jupyterlab = "*"
+nbconvert = "*"
+nbstripout = "*"
+papermill = "*"
+quarto = "*"
+voila = "*"
+
+# Visualization
+bokeh = "*"
+graphviz = "*"
+holoviews = "*"
+matplotlib = "*"
+nodejs = "*"
+plotly = "*"
+seaborn = "*"
+yellowbrick = "*"
+# dtale = "*"
+geopandas = "*"
+# itables = "*"
+
+# Address
+# libpostal = "*"
+# postal = "*"
+# usaddress = "*"
+
+# Database
+# connectorx = "*"
+# psycopg2 = "*"
+# sqlalchemy = "*"
+
+# Dashboards / Apps
+dash = "*"
+flask = "*"
+gradio = "*"
+panel = "*"
+streamlit = "*"
+
+# Machine Learning
+scikit-learn = "*"
+catboost = "*"
+xgboost = "*"
+lightgbm = "*"
+shap = "*"
+optuna = "*"
+category_encoders = "*"
+scikeras = "*"
+feature_engine = "*"
+imbalanced-learn = "*"
+skorch = "*"
+sklearn-pandas = "*"
+
+# EDA
+altair = "*"
+sweetviz ="*"
+missingno = "*"
+ydata-profiling = "*"
+
+
+# Formatting
+# black = "*"
+# isort = "*"
+# jupyterlab_code_formatter = "*"
+# sql-formatter = "*"
+
+
+# Other
